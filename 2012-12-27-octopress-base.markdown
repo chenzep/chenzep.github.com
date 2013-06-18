@@ -134,7 +134,14 @@ categories: Git
 	* 指定github库的URL,运行命令
 	>$ rake setup_github_pages  
 
-	 然后会提示你输入github的URL，此URL和上面的“git remote add origin git@github.com:[Username]/[Repository].git"是一样的。  
+	 然后会提示你输入github的URL，此URL和上面的“git remote add origin git@github.com:[Username]/[Repository].git"是一样的。
+  
+		windows下可能会在My Octopress Page is coming soon之后出现hellip;不是内部命令之类的错误, 可以不用管.
+		如果一定不想要出现这个错误可以修改myoctopress目录下的Rakefile, 搜My Octopress Page is coming soon,
+		在…前加个(这个是Windows cmd的转义符), 如下
+		system “echo ‘My Octopress Page is coming soon ^…’ > index.html” rake setup_github_pages
+		命令最后出现Now you can deploy to xxxxxxx with rake deploy, 就表示成功.
+
 	* 同步到github,运行命令
 	>$ rake deploy
 
@@ -148,15 +155,15 @@ categories: Git
 1. 添加第一篇文章  
 	* OctoPress的文章默认是用Markdown写的，具体教程点击[这里](http://wowubuntu.com/markdown/)  
 	* 我是使用markdownpad工具来书写Marddown的，工具的下载点击[这里](http://markdownpad.com/)
-	* 运行`rake new_post["Hello World"]`,会在source/_posts目录下生产一个markdown文件。  
+	* 运行`rake new_post["Hello World"]`,会在source/_posts目录下生成一个markdown文件。  
 	>Creating new post: source/_posts/2012-12-27-hello-world.markdown
 
 	* 随便在markdown文件上写点东西，如果有中文，会导致错误，解决方法请看下面内容。  
 	* 运行`rake generate`。
-	* 如果生产成功， 接着运行`rake preview`,在浏览器上输入`localhost:4000`就可以看到你的第一篇文章了。
+	* 如果生成成功， 接着运行`rake preview`,在浏览器上输入`localhost:4000`就可以看到你的第一篇文章了。
 
 1. 加入Octopress对中文的支持  
-	Octopress默认情况下是不支持中文的，如果你的Markdown文件中包含有中文字符，在`rake generate`阶段会导致生产错误，要解决这个问题，运行下面命令  
+	Octopress默认情况下是不支持中文的，如果你的Markdown文件中包含有中文字符，在`rake generate`阶段会导致生成错误，要解决这个问题，运行下面命令  
 	>$ cd  
 	>$ echo "export LC_ALL=en_US.UTF-8" > .bash_profile  
 	>$ echo "export LANG=en_US.UTF-8" >> .bash_profile  
@@ -170,3 +177,4 @@ categories: Git
 	- [Markdown 语法说明](http://wowubuntu.com/markdown/)  
 	- [为什么Markdown+R有较大概率成为科技写作主流](http://www.yangzhiping.com/tech/r-markdown-knitr.html)  
 	- [在Windows下使用jekyll如何避免出现中文字符集错误](http://yanping.me/cn/blog/2012/10/09/chinese-charset-problems-with-jekyll/)  
+	- [How-to-octopress](http://jenwang.org/blog/2013/01/23/how-to-octopress/)
