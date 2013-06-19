@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Chenzep的博客]]></title>
   <link href="http://yoursite.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-06-19T18:24:15+08:00</updated>
+  <updated>2013-06-19T18:58:57+08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Chenzep]]></name>
@@ -14,18 +14,17 @@
 
   
   <entry>
-    <title type="html"><![CDATA[octopress-adv]]></title>
+    <title type="html"><![CDATA[用Octopress建Blog(高级篇)]]></title>
     <link href="http://yoursite.com/blog/2013/06/19/octopress-adv/"/>
     <updated>2013-06-19T11:53:00+08:00</updated>
     <id>http://yoursite.com/blog/2013/06/19/octopress-adv</id>
-    <content type="html"><![CDATA[<h1>在Github用Octopress建Blog(高级篇)</h1>
-
-<ol>
+    <content type="html"><![CDATA[<ol>
 <li><p>准备</p>
 
 <ul>
-<li>编码。octopress的配置文件如果包含有中文，则此文件必须使用无BOM的UTF-8编码，否则<code>rake generate</code>的时候会出错。 使用UltraEdit的<code>文件--&gt;另存为</code>可以把文件保存为无BOM的UTF-8编码格式。
-  <img src="/images/pic/octopress_adv_encode.jpg" alt="" /></li>
+<li><p>编码。octopress的配置文件如果包含有中文，则此文件必须使用无BOM的UTF-8编码，否则<code>rake generate</code>的时候会出错。 使用UltraEdit的<code>文件--&gt;另存为</code>可以把文件保存为无BOM的UTF-8编码格式。</p>
+
+<p>  <img src="/images/pic/octopress_adv_encode.jpg" alt="" /></p></li>
 </ul>
 </li>
 <li><p>参考<br/>
@@ -41,19 +40,22 @@
 <img src="/images/pic/octopress_adv_disqus_justcomment.jpg" alt="" /></li>
 </ul>
 </li>
+<li><p>关于More
+ 正确的书写应该如下，注意空格，很多网站就是空格错误，导致无效。</p>
+
+<pre><code> &lt;!-- more --&gt;
+</code></pre></li>
 </ol>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[octopress_base]]></title>
+    <title type="html"><![CDATA[用Octopress建Blog(基础篇)]]></title>
     <link href="http://yoursite.com/blog/2012/12/27/octopress-base/"/>
     <updated>2012-12-27T11:38:00+08:00</updated>
     <id>http://yoursite.com/blog/2012/12/27/octopress-base</id>
-    <content type="html"><![CDATA[<h1>在Github用Octopress建Blog(基础篇)</h1>
-
-<ol>
+    <content type="html"><![CDATA[<ol>
 <li><p>安装railsinstaller.<br/>
  点击<a href="http://railsinstaller.org/">这里</a>到官方网站下载软件.railsinstaller包含了ruby,rails,bundle等一系列工具，具体可以看官方网站的说明。安装过程比较简单，就是不断的Next,除了安装路径，其他使用默认设置即可。</p></li>
 <li><p>配置rails环境<br/>
