@@ -93,7 +93,7 @@
 
 
 <div class="entry-content"><ol>
-<li><p>准备</p>
+<li>准备
 
 <ul>
 <li><p>编码。octopress的配置文件如果包含有中文，则此文件必须使用无BOM的UTF-8编码，否则<code>rake generate</code>的时候会出错。 使用UltraEdit的<code>文件--&gt;另存为</code>可以把文件保存为无BOM的UTF-8编码格式。</p>
@@ -101,6 +101,13 @@
 <p>  <img src="/pics/octopress_adv_encode.jpg" alt="" /></p></li>
 </ul>
 </li>
+</ol>
+
+
+<!-- more -->
+
+
+<ol>
 <li><p>参考<br/>
 本来是想自己写的，但是发现网上有一篇整理的很好的文章，就不重复劳动了。文章链接如下：<br/>
  <a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html</a></p></li>
@@ -119,6 +126,32 @@
 
 <pre><code> &lt;!-- more --&gt;
 </code></pre></li>
+<li><p>修改代码区块的颜色
+ Octopress默认的代码区块字体的颜色太暗，改明亮一下，修改<code>sass\partials\_syntax.scss</code>文件</p>
+
+<pre><code> p, li {
+   code {
+     @extend .mono;
+     display: inline-block;
+     white-space: no-wrap;
+     background: #fff;
+     font-size: .8em;
+     line-height: 1.5em;
+     color: #888888; /* 原来是#555 */
+     border: 1px solid #ddd;
+     @include border-radius(.4em);
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+   pre code { font-size: 1em !important; background: none; border: none; }
+ }
+</code></pre></li>
+<li><p>Bug</p>
+
+<ol>
+<li><code>&lt;!-- more --&gt;</code>后面接代码区块存在一些问题，具体原因不清楚。</li>
+</ol>
+</li>
 </ol>
 
 </div>

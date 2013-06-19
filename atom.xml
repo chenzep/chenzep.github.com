@@ -4,7 +4,7 @@
   <title><![CDATA[Chenzep的博客]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-06-19T19:07:54+08:00</updated>
+  <updated>2013-06-19T21:41:28+08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Chenzep]]></name>
@@ -19,7 +19,7 @@
     <updated>2013-06-19T11:53:00+08:00</updated>
     <id>http://yoursite.com/blog/2013/06/19/octopress-adv</id>
     <content type="html"><![CDATA[<ol>
-<li><p>准备</p>
+<li>准备
 
 <ul>
 <li><p>编码。octopress的配置文件如果包含有中文，则此文件必须使用无BOM的UTF-8编码，否则<code>rake generate</code>的时候会出错。 使用UltraEdit的<code>文件--&gt;另存为</code>可以把文件保存为无BOM的UTF-8编码格式。</p>
@@ -27,6 +27,13 @@
 <p>  <img src="http://yoursite.com/pics/octopress_adv_encode.jpg" alt="" /></p></li>
 </ul>
 </li>
+</ol>
+
+
+<!-- more -->
+
+
+<ol>
 <li><p>参考<br/>
 本来是想自己写的，但是发现网上有一篇整理的很好的文章，就不重复劳动了。文章链接如下：<br/>
  <a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html</a></p></li>
@@ -45,6 +52,32 @@
 
 <pre><code> &lt;!-- more --&gt;
 </code></pre></li>
+<li><p>修改代码区块的颜色
+ Octopress默认的代码区块字体的颜色太暗，改明亮一下，修改<code>sass\partials\_syntax.scss</code>文件</p>
+
+<pre><code> p, li {
+   code {
+     @extend .mono;
+     display: inline-block;
+     white-space: no-wrap;
+     background: #fff;
+     font-size: .8em;
+     line-height: 1.5em;
+     color: #888888; /* 原来是#555 */
+     border: 1px solid #ddd;
+     @include border-radius(.4em);
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+   pre code { font-size: 1em !important; background: none; border: none; }
+ }
+</code></pre></li>
+<li><p>Bug</p>
+
+<ol>
+<li><code>&lt;!-- more --&gt;</code>后面接代码区块存在一些问题，具体原因不清楚。</li>
+</ol>
+</li>
 </ol>
 
 ]]></content>
@@ -59,59 +92,56 @@
 <li><p>安装railsinstaller.<br/>
  点击<a href="http://railsinstaller.org/">这里</a>到官方网站下载软件.railsinstaller包含了ruby,rails,bundle等一系列工具，具体可以看官方网站的说明。安装过程比较简单，就是不断的Next,除了安装路径，其他使用默认设置即可。</p></li>
 <li><p>配置rails环境<br/>
- 在安装railsinstaller的最后一步，有一个配置项，提示用户是否进入rails环境配置，此配置项默认情况下是选中的。如果进入了rails配置环境，用户需要输入自己的用户名和邮箱，输入完成之后，程序自动生成一个ssh_key,放在用户目录的.ssh子目录下。运行过程的相关信息如下：</p></li>
-</ol>
+ 在安装railsinstaller的最后一步，有一个配置项，提示用户是否进入rails环境配置，此配置项默认情况下是选中的。如果进入了rails配置环境，用户需要输入自己的用户名和邮箱，输入完成之后，程序自动生成一个ssh_key,放在用户目录的.ssh子目录下。<!-- more -->运行过程的相关信息如下：</p>
 
+<pre><code> # Rails Environment Configuration.
 
-<!-- more -->
+ Your git configuration is incomplete.
+ user.name and user.email are required for properly using git and services such
+ as GitHub ( http://github.com/ ).
 
+  Please enter your name, for example mine is: Wayne E. Seguin
+ name &gt; xxxxxxx
+ Setting user.name to xxxxxxx
 
-<pre><code>    # Rails Environment Configuration.
+  Please enter your email address, for example mine is: wayneeseguin@gmail.com
+ email &gt; xxxxxxx@gmail.com
+ Setting user.email to xxxxxxx@gmail.com
 
-    Your git configuration is incomplete.
-    user.name and user.email are required for properly using git and services such
-    as GitHub ( http://github.com/ ).
+ ---
+ git:
+   user.name:  xxxxxxx
+   user.email: xxxxxxx@gmail.com
+   version:    git version 1.7.9.msysgit.0
 
-     Please enter your name, for example mine is: Wayne E. Seguin
-    name &gt; xxxxxxx
-    Setting user.name to xxxxxxx
+ ruby:
+   bin:        D:/RailsInstaller/Ruby1.9.2/bin/ruby.exe
+   version:    ruby 1.9.3p125 (2012-02-16) [i386-mingw32]
 
-     Please enter your email address, for example mine is: wayneeseguin@gmail.com
-    email &gt; xxxxxxx@gmail.com
-    Setting user.email to xxxxxxx@gmail.com
+ rails:
+   bin:        D:/RailsInstaller/Ruby1.9.2/bin/rails.bat
+   version:    Rails 3.2.1
 
-    ---
-    git:
-      user.name:  xxxxxxx
-      user.email: xxxxxxx@gmail.com
-      version:    git version 1.7.9.msysgit.0
+ ssh:
+   public_key_location: C:\Users\xxxxxxx/.ssh/id_rsa.pub
+   public_key_contents: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0u36KdY6zTS3RpLO1C6Gh
+ tVr3ELzYRhGzjU2vcxXdGdAeLrLPfN7G6aUQ65qrW3pTwb8zcZrrEmdhx2/xV3mkAFiE5riB2ZGLw2se
+ pRZdnmkiyULV33c51KYsltyO6F37RWtdbAQA2OjPNGuTL+DtxwmdDeObUjKJjkt8RxFtWqCJ0TqH+aMw
+ r+MPycNxSamk1Ady5DySM5EH8YTbchD+GFU93VWRAFpydTy8ZAWhlx4PsBoWbONzrlhtqjovNsKRw5VH
+ atk58hxsp1HPRR5XvF0LYd401QiwArDuw/m41rhrp8CyMzb0dTOQGxfl3ckNmcBovjSyaqbVYkY32Crm
+ Q== xxxxxxx &lt;xxxxxxx@gmail.com&gt;
 
-    ruby:
-      bin:        D:/RailsInstaller/Ruby1.9.2/bin/ruby.exe
-      version:    ruby 1.9.3p125 (2012-02-16) [i386-mingw32]
-
-    rails:
-      bin:        D:/RailsInstaller/Ruby1.9.2/bin/rails.bat
-      version:    Rails 3.2.1
-
-    ssh:
-      public_key_location: C:\Users\xxxxxxx/.ssh/id_rsa.pub
-      public_key_contents: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0u36KdY6zTS3RpLO1C6Gh
-    tVr3ELzYRhGzjU2vcxXdGdAeLrLPfN7G6aUQ65qrW3pTwb8zcZrrEmdhx2/xV3mkAFiE5riB2ZGLw2se
-    pRZdnmkiyULV33c51KYsltyO6F37RWtdbAQA2OjPNGuTL+DtxwmdDeObUjKJjkt8RxFtWqCJ0TqH+aMw
-    r+MPycNxSamk1Ady5DySM5EH8YTbchD+GFU93VWRAFpydTy8ZAWhlx4PsBoWbONzrlhtqjovNsKRw5VH
-    atk58hxsp1HPRR5XvF0LYd401QiwArDuw/m41rhrp8CyMzb0dTOQGxfl3ckNmcBovjSyaqbVYkY32Crm
-    Q== xxxxxxx &lt;xxxxxxx@gmail.com&gt;
-
-    C:\Sites&gt;
-
-这里要说明几点:
-- C:\Users\xxxxxxx/.ssh/id_rsa.pub是ssh的公匙，对应的私匙是同样目录下的id_rsa文件.
-- 安装完成之后，如果要执行相关命令,我们可以通过`开始菜单--&gt;railsinstaller--&gt;git bash`来进入bash窗口,输入命令。
-- Windows路径的访问，比如`c:\Sites`,在bash下对应的是`/c/Sites`.
+ C:\Sites&gt;
 </code></pre>
 
-<ol>
+ 这里要说明几点:
+
+<ul>
+<li>C:\Users\xxxxxxx/.ssh/id_rsa.pub是ssh的公匙，对应的私匙是同样目录下的id_rsa文件.</li>
+<li>安装完成之后，如果要执行相关命令,我们可以通过<code>开始菜单--&gt;railsinstaller--&gt;git bash</code>来进入bash窗口,输入命令。</li>
+<li>Windows路径的访问，比如<code>c:\Sites</code>,在bash下对应的是<code>/c/Sites</code>.</li>
+</ul>
+</li>
 <li><p>配置Gems源<br/>
  把默认的Gems源改成ruby.taobao.com</p>
 
@@ -137,11 +167,11 @@
 
 <ul>
 <li>创建github非常简单，需要注意的是库名最好是Username.github.com的形式。这样的话，我们就可以通过http://Username.github.com的URL访问BLOG了。 <br/>
-  <img src="http://yoursite.com/pics/octopress_base_github_new.png" alt="" /><br/>
+  <img src="http://yoursite.com/images/pic/octopress_base_github_new.png" alt="" /><br/>
   图片中的叹号表明我已经创建了此库，不能再次创建。</li>
 <li>添加SSH Public_key<br/>
   a. 点击右上角的<code>account setting</code>按钮,进入setting页面。接着点击页面中的ssh keys按钮，添加一个SSH key。然后把上面的id_rsa.pub文件中的内容拷贝到Key框中，如下图所示，接着点击<code>Add Key</code>按钮,按照提示输入github账户的密码，SSH Key加入成功。<br/>
-  <img src="http://yoursite.com/pics/octopress_base_sshkey_add.png" alt="" /></li>
+  <img src="http://yoursite.com/images/pic/octopress_base_sshkey_add.png" alt="" /></li>
 </ul>
 </li>
 <li><p>下载Octopress源码<br/>
