@@ -4,6 +4,8 @@ title: "octopress_base"
 date: 2012-12-27 11:38
 comments: true
 categories: Git
+description: "在Github用Octopress建Blog" 
+keywords: Github Octopress 
 ---
 
 # 在Github用Octopress建Blog(基础篇) #
@@ -170,6 +172,17 @@ categories: Git
 	
 	完成之后，关闭并重进bash即可。	
 
+1. 总结
+	1. 执行rake new_post['title']来生成一个博文；
+	2. 找对生成的markdown文件，编辑内容；
+	3. 执行rake generate来生成文章；
+	4. 执行rake preview在本地预览；
+	5. 执行rake deploy发布到Github中。
+	6. 执行下面命令将修改的源码推送到source分支：
+	>git add .  
+	>git commit -m “your message”  
+	>git push origin source  
+
 1. 参考文章  
 	- [Blog = GitHub + Octopress](http://mrzhang.me/blog/blog-equals-github-plus-octopress.html)
 	- [搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)  
@@ -178,3 +191,4 @@ categories: Git
 	- [为什么Markdown+R有较大概率成为科技写作主流](http://www.yangzhiping.com/tech/r-markdown-knitr.html)  
 	- [在Windows下使用jekyll如何避免出现中文字符集错误](http://yanping.me/cn/blog/2012/10/09/chinese-charset-problems-with-jekyll/)  
 	- [How-to-octopress](http://jenwang.org/blog/2013/01/23/how-to-octopress/)
+	- [Windows下搭建Octopress博客](http://www.cnblogs.com/oec2003/archive/2013/05/27/3100896.html)
