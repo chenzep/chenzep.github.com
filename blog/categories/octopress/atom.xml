@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Chenzep的博客]]></title>
   <link href="http://yoursite.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-06-19T18:58:57+08:00</updated>
+  <updated>2013-06-19T19:07:54+08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Chenzep]]></name>
@@ -24,7 +24,7 @@
 <ul>
 <li><p>编码。octopress的配置文件如果包含有中文，则此文件必须使用无BOM的UTF-8编码，否则<code>rake generate</code>的时候会出错。 使用UltraEdit的<code>文件--&gt;另存为</code>可以把文件保存为无BOM的UTF-8编码格式。</p>
 
-<p>  <img src="/images/pic/octopress_adv_encode.jpg" alt="" /></p></li>
+<p>  <img src="/pics/octopress_adv_encode.jpg" alt="" /></p></li>
 </ul>
 </li>
 <li><p>参考<br/>
@@ -35,9 +35,9 @@
 <ul>
 <li>设置语言
   Setting-->General-->Language-->chinese
-  <img src="/images/pic/octopress_adv_disqus_language.jpg" alt="" /></li>
+  <img src="/pics/octopress_adv_disqus_language.jpg" alt="" /></li>
 <li>去掉广告
-<img src="/images/pic/octopress_adv_disqus_justcomment.jpg" alt="" /></li>
+<img src="/pics/octopress_adv_disqus_justcomment.jpg" alt="" /></li>
 </ul>
 </li>
 <li><p>关于More
@@ -137,11 +137,11 @@
 
 <ul>
 <li>创建github非常简单，需要注意的是库名最好是Username.github.com的形式。这样的话，我们就可以通过http://Username.github.com的URL访问BLOG了。 <br/>
-  <img src="/images/pic/octopress_base_github_new.png" alt="" /><br/>
+  <img src="/pics/octopress_base_github_new.png" alt="" /><br/>
   图片中的叹号表明我已经创建了此库，不能再次创建。</li>
 <li>添加SSH Public_key<br/>
   a. 点击右上角的<code>account setting</code>按钮,进入setting页面。接着点击页面中的ssh keys按钮，添加一个SSH key。然后把上面的id_rsa.pub文件中的内容拷贝到Key框中，如下图所示，接着点击<code>Add Key</code>按钮,按照提示输入github账户的密码，SSH Key加入成功。<br/>
-  <img src="/images/pic/octopress_base_sshkey_add.png" alt="" /></li>
+  <img src="/pics/octopress_base_sshkey_add.png" alt="" /></li>
 </ul>
 </li>
 <li><p>下载Octopress源码<br/>
