@@ -1,21 +1,20 @@
 ---
 layout: post
-title: "用Octopress建Blog(基础篇)"
+title: "octopress_base"
 date: 2012-12-27 11:38
 comments: true
 categories: Octopress
-description: "用Octopress建Blog" 
+description: "在Github用Octopress建Blog" 
 keywords: Github Octopress 
 ---
+
+# 在Github用Octopress建Blog(基础篇) #
 
 1. 安装railsinstaller.  
 	点击[这里](http://railsinstaller.org/)到官方网站下载软件.railsinstaller包含了ruby,rails,bundle等一系列工具，具体可以看官方网站的说明。安装过程比较简单，就是不断的Next,除了安装路径，其他使用默认设置即可。
 
 1. 配置rails环境  
-	在安装railsinstaller的最后一步，有一个配置项，提示用户是否进入rails环境配置，此配置项默认情况下是选中的。如果进入了rails配置环境，用户需要输入自己的用户名和邮箱，输入完成之后，程序自动生成一个ssh_key,放在用户目录的.ssh子目录下。运行过程的相关信息如下：
-
-
-<!-- more -->
+	在安装railsinstaller的最后一步，有一个配置项，提示用户是否进入rails环境配置，此配置项默认情况下是选中的。如果进入了rails配置环境，用户需要输入自己的用户名和邮箱，输入完成之后，程序自动生成一个ssh_key,放在用户目录的.ssh子目录下。<!-- more -->运行过程的相关信息如下：
 
 		# Rails Environment Configuration.
 		
@@ -84,11 +83,11 @@ keywords: Github Octopress
 
 1. 创建github库
 	- 创建github非常简单，需要注意的是库名最好是Username.github.com的形式。这样的话，我们就可以通过http://Username.github.com的URL访问BLOG了。   
-		![](/pics/octopress_base_github_new.png)  
+		![](/images/pic/octopress_base_github_new.png)  
 		图片中的叹号表明我已经创建了此库，不能再次创建。  
 	- 添加SSH Public_key  
 		a. 点击右上角的`account setting`按钮,进入setting页面。接着点击页面中的ssh keys按钮，添加一个SSH key。然后把上面的id_rsa.pub文件中的内容拷贝到Key框中，如下图所示，接着点击`Add Key`按钮,按照提示输入github账户的密码，SSH Key加入成功。  
-		![](/pics/octopress_base_sshkey_add.png)
+		![](/images/pic/octopress_base_sshkey_add.png)
 
 
 1. 下载Octopress源码  
