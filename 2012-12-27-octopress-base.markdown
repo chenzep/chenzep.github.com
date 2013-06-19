@@ -1,14 +1,12 @@
 ---
 layout: post
-title: "octopress_base"
+title: "用Octopress建Blog(基础篇)"
 date: 2012-12-27 11:38
 comments: true
 categories: Octopress
 description: "在Github用Octopress建Blog" 
 keywords: Github Octopress 
 ---
-
-# 在Github用Octopress建Blog(基础篇) #
 
 1. 安装railsinstaller.  
 	点击[这里](http://railsinstaller.org/)到官方网站下载软件.railsinstaller包含了ruby,rails,bundle等一系列工具，具体可以看官方网站的说明。安装过程比较简单，就是不断的Next,除了安装路径，其他使用默认设置即可。
