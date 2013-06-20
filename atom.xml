@@ -4,7 +4,7 @@
   <title><![CDATA[Chenzep的博客]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-06-20T15:00:10+08:00</updated>
+  <updated>2013-06-20T15:35:22+08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Chenzep]]></name>
@@ -100,6 +100,27 @@
 
 <p> e. 经过上面的修改之后，浏览器本地预览的时候图片显示就正常了。在<code>rake deploy</code>阶段，脚本会把<code>public</code>目录下的图片拷贝到<code>_deploy</code>目录，并更新到github服务器。这个过程是脚本完成的，我们不需要参与。<br/>
  f. 至此，本地图片预览处理的整个流程完成。</p></li>
+<li><p>MinGW中文支持<br/>
+ a.进入RailsInstaller下的Git\etc目录。<br/>
+ b.编译<code>profile</code>文件，添加如下内容</p>
+
+<pre><code> export LANG=en
+ alias l='/bin/ls --show-control-chars --color=auto'
+ alias la='/bin/ls -aF --show-control-chars --color=auto'
+ alias ll='/bin/ls -alF --show-control-chars --color=auto'
+ alias ls='/bin/ls --show-control-chars --color=auto'
+</code></pre>
+
+<p> c. 修改inputrc文件，修改如下:</p>
+
+<pre><code> # disable/enable 8bit input
+ set meta-flag on
+ set input-meta on
+ set output-meta on
+ set convert-meta off
+</code></pre></li>
+<li><p>设置git commit 编辑器<br/>
+ 运行命令<code>git config --global core.editor notepad.exe</code>,即可设置记事本为编辑器.</p></li>
 <li><p>Bug</p>
 
 <ol>
