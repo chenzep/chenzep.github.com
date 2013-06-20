@@ -60,13 +60,13 @@ keywords: Github Octopress
 			    cp_r file, file.gsub(/#{args.source}/, "#{args.dest}") unless File.directory?(file)
 			  end
 			end
-	d. 用MarkdownPad2编译好文件之后，运行`rake generate`,`rake preview`更新和启动预览，然后再浏览器输入`localhost:4000`，发现浏览页面的图片显示也不正确。这是因为`octopress\public`目录下没有对应的图片导致的。修改`octopress/Rakefile`文件，把`octopress\source\_posts\pics`目录的内容拷贝到`octopress\public\pics'目录即可。修改如下：
+	d. 用MarkdownPad2编译好文件之后，运行`rake generate`,`rake preview`更新和启动预览，然后再浏览器输入`localhost:4000`，发现浏览页面的图片显示也不正确。这是因为`octopress\public`目录下没有对应的图片导致的。修改`octopress/Rakefile`文件，把`octopress\source\_posts\pics`目录的内容拷贝到`octopress\source`目录,然后jelly程序会把`octopress\source`目录的内容拷贝到`octopress\public`目录。修改如下：
 
 		desc "Generate jekyll site"
 		task :generate do
 		  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
 		  puts "## Copy Pictures"
-		  cp_r "#{source_dir}/_posts/pics", "#{source_dir}/pics"
+		  cp_r "#{source_dir}/_posts/pics", "#{source_dir}"
 		  puts "## Generating Site with Jekyll"
 		  system "compass compile --css-dir #{source_dir}/stylesheets"
 		  system "jekyll"
@@ -74,6 +74,27 @@ keywords: Github Octopress
 
 	e. 经过上面的修改之后，浏览器本地预览的时候图片显示就正常了。在`rake deploy`阶段，脚本会把`public`目录下的图片拷贝到`_deploy`目录，并更新到github服务器。这个过程是脚本完成的，我们不需要参与。  
 	f. 至此，本地图片预览处理的整个流程完成。
+
+1. MinGW中文支持  
+	a.进入RailsInstaller下的Git\etc目录。  
+	b.编译`profile`文件，添加如下内容
+	
+		export LANG=en
+		alias l='/bin/ls --show-control-chars --color=auto'
+		alias la='/bin/ls -aF --show-control-chars --color=auto'
+		alias ll='/bin/ls -alF --show-control-chars --color=auto'
+		alias ls='/bin/ls --show-control-chars --color=auto'
+
+	c. 修改inputrc文件，修改如下:
+
+		# disable/enable 8bit input
+		set meta-flag on
+		set input-meta on
+		set output-meta on
+		set convert-meta off
+
+1. 设置git commit 编辑器  
+	运行命令`git config --global core.editor notepad.exe`,即可设置记事本为编辑器.
 
 1. Bug  
 	1. `<!-- more -->`后面接代码区块存在一些问题，具体原因不清楚。
