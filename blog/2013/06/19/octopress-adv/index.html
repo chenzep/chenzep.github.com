@@ -159,13 +159,13 @@
      end
 </code></pre>
 
-<p> d. 用MarkdownPad2编译好文件之后，运行<code>rake generate</code>,<code>rake preview</code>更新和启动预览，然后再浏览器输入<code>localhost:4000</code>，发现浏览页面的图片显示也不正确。这是因为<code>octopress\public</code>目录下没有对应的图片导致的。修改<code>octopress/Rakefile</code>文件，把<code>octopress\source\_posts\pics</code>目录的内容拷贝到`octopress\public\pics&#8217;目录即可。修改如下：</p>
+<p> d. 用MarkdownPad2编译好文件之后，运行<code>rake generate</code>,<code>rake preview</code>更新和启动预览，然后再浏览器输入<code>localhost:4000</code>，发现浏览页面的图片显示也不正确。这是因为<code>octopress\public</code>目录下没有对应的图片导致的。修改<code>octopress/Rakefile</code>文件，把<code>octopress\source\_posts\pics</code>目录的内容拷贝到<code>octopress\source</code>目录,然后jelly程序会把<code>octopress\source</code>目录的内容拷贝到<code>octopress\public</code>目录。修改如下：</p>
 
 <pre><code> desc "Generate jekyll site"
  task :generate do
    raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
    puts "## Copy Pictures"
-   cp_r "#{source_dir}/_posts/pics", "#{source_dir}/pics"
+   cp_r "#{source_dir}/_posts/pics", "#{source_dir}"
    puts "## Generating Site with Jekyll"
    system "compass compile --css-dir #{source_dir}/stylesheets"
    system "jekyll"
