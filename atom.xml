@@ -4,7 +4,7 @@
   <title><![CDATA[Chenzep的博客]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-06-20T09:07:29+08:00</updated>
+  <updated>2013-06-20T13:01:28+08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Chenzep]]></name>
@@ -34,7 +34,7 @@
 
 
 <ol>
-<li><p>参考<br/>
+<li><p>常用设置
 本来是想自己写的，但是发现网上有一篇整理的很好的文章，就不重复劳动了。文章链接如下：<br/>
  <a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html</a></p></li>
 <li><p>Disqus设置</p>
@@ -72,6 +72,34 @@
    pre code { font-size: 1em !important; background: none; border: none; }
  }
 </code></pre></li>
+<li><p>本地图片预览<br/>
+ a. MarkdownPad2是支持图片预览功能的(好像要Pro版本?)。如果使用的本地图片，比如<code>![](/pics/1.jpg)</code>, 需要在Markdown文件的目录下存在<code>pics/1.jpg</code>图片，MarkdownPad2才能正确显示图片。因此，本地图片一rak般放到<code>octopress\source\_posts\pics</code>文件夹下。<br/>
+ b. 为了避免使用<code>git add .</code>命令的时候把<code>pics</code>文件夹的图片也添加进入，我们需要添加一个<code>.gitignore</code>文件让git来忽略pics文件夹，文件的内容很简单,输入忽略的目录名称即可：<code>pics</code><br/>
+ c. 加入了<code>.gitignore</code>文件之后，会导致<code>rake deploy</code>阶段出错，我们修改<code>octopress/Rakefile</code>文件，忽略对<code>.gitignore</code>文件的处理，修改如下:</p>
+
+<pre><code>     desc "copy dot files for deployment"
+     task :copydot, :source, :dest do |t, args|
+       FileList["#{args.source}/**/.*"].exclude("**/.","**/..", "**/.DS_Store", "**/._*","**/.gitignore").each do |file|
+         cp_r file, file.gsub(/#{args.source}/, "#{args.dest}") unless File.directory?(file)
+       end
+     end
+</code></pre>
+
+<p> d. 用MarkdownPad2编译好文件之后，运行<code>rake generate</code>,<code>rake preview</code>更新和启动预览，然后再浏览器输入<code>localhost:4000</code>，发现浏览页面的图片显示也不正确。这是因为<code>octopress\public</code>目录下没有对应的图片导致的。修改<code>octopress/Rakefile</code>文件，把<code>octopress\source\_posts\pics</code>目录的内容拷贝到`octopress\public\pics&#8217;目录即可。修改如下：</p>
+
+<pre><code> desc "Generate jekyll site"
+ task :generate do
+   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+   puts "## Copy Pictures"
+   cp_r "#{source_dir}/_posts/pics", "#{source_dir}/pics"
+   puts "## Generating Site with Jekyll"
+   system "compass compile --css-dir #{source_dir}/stylesheets"
+   system "jekyll"
+ end
+</code></pre>
+
+<p> e. 经过上面的修改之后，浏览器本地预览的时候图片显示就正常了。在<code>rake deploy</code>阶段，脚本会把<code>public</code>目录下的图片拷贝到<code>_deploy</code>目录，并更新到github服务器。这个过程是脚本完成的，我们不需要参与。<br/>
+ f. 至此，本地图片预览处理的整个流程完成。</p></li>
 <li><p>Bug</p>
 
 <ol>
