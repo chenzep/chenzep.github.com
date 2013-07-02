@@ -4,7 +4,7 @@
   <title><![CDATA[Chenzep的博客]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-06-24T14:37:41+08:00</updated>
+  <updated>2013-07-02T14:40:07+08:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Chenzep]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu-log]]></title>
+    <link href="http://yoursite.com/blog/2013/07/01/ubuntu-log/"/>
+    <updated>2013-07-01T09:17:00+08:00</updated>
+    <id>http://yoursite.com/blog/2013/07/01/ubuntu-log</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>平台
+ Ubuntu10.04 x64</p></li>
+<li><p>Git 编译安装</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[android日记保存]]></title>
@@ -24,9 +38,8 @@
  a) 拦截<code>system\core\liblog\Logd_write.c</code>中的<code>__android_log_buf_write</code>函数。
  b) 参考或者直接调用<code>logcat</code>命令，把<code>/dev/log/...</code>块文件中的记录读取出来，并保存到文件中。
  测试了一下，发现这两种方法都有缺点:
- a) <code>__android_log_buf_write</code>函数是进程相关的，如果是通过条件变量来控制LOG保存与否，则条件变量只能在本进程中使用。也就是说不能控制系统或者其他应用的进程LOG的保存。还有一个就是权限问题，一般应用是无法把LOG保存到系统目录的。</p>
-
-<p> b)通过<code>logcat</code>方法，就是保存文件大小方面不好控制,如果没有这方面的需求，这种方法还是可以用的。</p></li>
+ a) <code>__android_log_buf_write</code>函数是进程相关的，如果通过条件变量来控制LOG是否保存，则条件变量必须要做成是进程共享的，这个有点麻烦。
+ b)通过<code>logcat</code>方法，logcat本身会过滤掉一些优先级比较低的消息，还有就是保存文件大小方面不好控制。</p></li>
 <li><p>代码流程<br/>
  简单概况下Log.v的函数的实现代码，详细的原理说明参考<a href="http://www.cnblogs.com/hoys/archive/2011/09/30/2196199.html">解读Android LOG机制的实现</a>。<br/>
  a. Log.v函数实现文件为：<code>frameworks\base\core\java\android\util\Log.java</code>。</p>
@@ -167,8 +180,10 @@
  }   
 </code></pre></li>
 <li><p>定制
- 根据上面的代码流程，我们发现，在<code>logger_aio_write</code>添加保存LOG到文件中的功能是最好的，因为这里是内核层，不存在权限问题，也不存在进程共享的问题。
- 比较头疼的是，在内核层，很多函数都无法使用，比如fopen,fread,&#8230;fclose,rename等。还好，内核层有对应的函数。
+ 根据上面的代码流程，我们发现，在<code>logger_aio_write</code>添加保存LOG到文件中的功能是最好的，因为这里是内核层，也不存在进程共享的问题,而且也能捕获所有的LOG。
+ 比较头疼的问题有两个：
+ a) 在内核层，很多函数都无法使用，比如fopen,fread,&#8230;fclose,rename等。还好，内核层有对应的函数。<br/>
+ b) 内核层也存在着权限的问题，有些系统目录APP是没有权限访问此目录的，这个问题尚未解决。
  下面是一些代码片段:</p>
 
 <pre><code> const char *pri = iov[0].iov_base;

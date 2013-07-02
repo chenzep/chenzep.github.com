@@ -14,14 +14,18 @@
     </url>
     <url>
         <loc>http://yoursite.com/blog/2013/06/22/android-log/</loc>
-        <lastmod>2013-06-24T13:19:12+08:00</lastmod>
+        <lastmod>2013-07-02T14:36:42+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yoursite.com/blog/2013/07/01/ubuntu-log/</loc>
+        <lastmod>2013-07-01T09:35:10+08:00</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/blog/archives/</loc>
-        <lastmod>2013-06-24T13:19:12+08:00</lastmod>
+        <lastmod>2013-07-02T14:36:42+08:00</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/</loc>
-        <lastmod>2013-06-24T13:19:12+08:00</lastmod>
+        <lastmod>2013-07-02T14:36:42+08:00</lastmod>
     </url>
 </urlset>
