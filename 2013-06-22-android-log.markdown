@@ -13,9 +13,8 @@ keywords: Android log logcat 重定位 保存 文件
 	a) 拦截`system\core\liblog\Logd_write.c`中的`__android_log_buf_write`函数。
 	b) 参考或者直接调用`logcat`命令，把`/dev/log/...`块文件中的记录读取出来，并保存到文件中。
 	测试了一下，发现这两种方法都有缺点:
-	a) `__android_log_buf_write`函数是进程相关的，如果是通过条件变量来控制LOG保存与否，则条件变量只能在本进程中使用。也就是说不能控制系统或者其他应用的进程LOG的保存。还有一个就是权限问题，一般应用是无法把LOG保存到系统目录的。
-
-	b)通过`logcat`方法，就是保存文件大小方面不好控制,如果没有这方面的需求，这种方法还是可以用的。
+	a) `__android_log_buf_write`函数是进程相关的，如果通过条件变量来控制LOG是否保存，则条件变量必须要做成是进程共享的，这个有点麻烦。
+	b)通过`logcat`方法，logcat本身会过滤掉一些优先级比较低的消息，还有就是保存文件大小方面不好控制。
 
 1. 代码流程  
 	简单概况下Log.v的函数的实现代码，详细的原理说明参考[解读Android LOG机制的实现](http://www.cnblogs.com/hoys/archive/2011/09/30/2196199.html)。  
@@ -149,11 +148,12 @@ keywords: Android log logcat 重定位 保存 文件
 
 		
 1. 定制
-	根据上面的代码流程，我们发现，在`logger_aio_write`添加保存LOG到文件中的功能是最好的，因为这里是内核层，不存在权限问题，也不存在进程共享的问题。
-	比较头疼的是，在内核层，很多函数都无法使用，比如fopen,fread,...fclose,rename等。还好，内核层有对应的函数。
+	根据上面的代码流程，我们发现，在`logger_aio_write`添加保存LOG到文件中的功能是最好的，因为这里是内核层，也不存在进程共享的问题,而且也能捕获所有的LOG。
+	比较头疼的问题有两个：
+	a) 在内核层，很多函数都无法使用，比如fopen,fread,...fclose,rename等。还好，内核层有对应的函数。  
+    b) 内核层也存在着权限的问题，有些系统目录APP是没有权限访问此目录的，这个问题尚未解决。
 	下面是一些代码片段:
 
-	
 		const char *pri = iov[0].iov_base;
 
 		const char *tag ;
