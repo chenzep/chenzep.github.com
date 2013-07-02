@@ -70,7 +70,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/01/ubuntu-log/">Ubuntu-log</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/07/01/ubuntu-log/">Git 源代码 编译</a></h1>
     
     
       <p class="meta">
@@ -96,9 +96,83 @@
 
 
   <div class="entry-content"><ol>
-<li><p>平台
- Ubuntu10.04 x64</p></li>
-<li><p>Git 编译安装</p></li>
+<li><p>下载源代码</p>
+
+<pre><code> git clone https://github.com/git/git.git
+</code></pre></li>
+<li><p>查看到指定版本</p>
+
+<pre><code>git tag
+</code></pre></li>
+<li><p>切换到指定版本</p>
+
+<pre><code>git checkout -b v1.7.11
+</code></pre></li>
+<li><p>编译</p>
+
+<pre><code>make prefix=/usr/local all
+make prefix=/usr/local install
+</code></pre>
+
+<p>还有一种编译方法，我一般不用</p>
+
+<pre><code>autoconf
+./configure
+make 
+sudo make install
+</code></pre></li>
+<li><p>验证<br/>
+ 编译完成之后，重新打开终端，输入<strong>git &#8211;version</strong>验证即可。</p></li>
+<li><p>CentOS6.4 64Bit<br/>
+ 出现了expat.h: No such file or direcotry的错误，运行yum install expat-devel即可。</p></li>
+<li><p>Unbuntu10.04 64Bit</p>
+
+<ul>
+<li><p>缺少<strong>openssl/ssl.h</strong>  <br/>
+1.添加数据源到<strong>/etc/apt/source.list</strong>文件中</p>
+
+<pre><code>  deb http://archive.canonical.com/ lucid parter
+ 2.运行
+
+  sudo update
+  sudo apt-get libssl-dev
+</code></pre></li>
+<li><p>缺少<strong>curl/curl.h</strong><br/>
+1.更新数据源</p>
+
+<pre><code>    deb http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse
+    deb http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse
+    deb http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse
+    deb http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse
+    deb http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse
+    deb-src http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse
+    deb-src http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse
+    deb-src http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse
+    deb-src http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse
+    deb-src http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse 
+</code></pre>
+
+<p>2.运行:</p>
+
+<pre><code>    sudo update
+    sudo apt-get libcurl4-gnutls-dev
+</code></pre>
+
+<ul>
+<li><p>缺少<strong>expat.h</strong><br/>
+运行</p>
+
+<pre><code>sudo apt-get install libexpat1-dev
+</code></pre></li>
+<li><p><strong>/bin/sh: msgfmt: command not found</strong><br/>
+运行</p>
+
+<pre><code>  apt-get install gettext
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
 
 </div>
@@ -520,6 +594,7 @@
   <h1>文章分类</h1> 
   <ul id="categories"> 
     <li class='category'><a href='/blog/categories/android/'>Android (2)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (2)</a></li>
  
   </ul> 
@@ -528,7 +603,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/01/ubuntu-log/">ubuntu-log</a>
+        <a href="/blog/2013/07/01/ubuntu-log/">Git 源代码 编译</a>
       </li>
     
       <li class="post">
